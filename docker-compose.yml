@@ -41,12 +41,14 @@ services:
       - MONGO_URL=mongodb://root:qwerty@mongo:27017/
     networks:
       - dev
+    depends_on:
+      - mongo
 
   frontend:
     build:
       context: ./frontend
     environment:
-      - VITE_API_URL=value
-      - VITE_API_WS_URL=value
+      - VITE_API_URL=http://localhost:3000/api
+      - VITE_API_WS_URL=http://localhost:3000
     networks:
       - dev
