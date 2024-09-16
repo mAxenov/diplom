@@ -2,5 +2,5 @@
 	path = frontend
 	url = https://github.com/mAxenov/frontReact
 [submodule "backendNestJs"]
-	path = backendNestJs
+	path = backend
 	url = https://github.com/mAxenov/backendNestJs
