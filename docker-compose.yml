@@ -1,3 +1,6 @@
+env_file:
+  - .env
+
 networks:
   dev:
 
@@ -8,8 +11,8 @@ services:
     ports:
       - 27017:27017
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: qwerty
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
     networks:
       - dev
 
@@ -21,7 +24,7 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: qwerty
-      ME_CONFIG_MONGODB_URL: mongodb://root:qwerty@mongo:27017/
+      ME_CONFIG_MONGODB_URL: mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017/
     networks:
       - dev
 
@@ -41,8 +44,8 @@ services:
     build:
       context: ./backend
     environment:
-      - MONGO_URL=mongodb://root:qwerty@mongo:27017/
-      - SECRET=2363d042e509c2cf7c1af5b7e47b5db866b81b96130ce30be89919c5617eddcc
+      - MONGO_URL=mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017/
+      - SECRET=${SECRET}
     networks:
       - dev
     depends_on:
@@ -52,7 +55,7 @@ services:
     build:
       context: ./frontend
       args:
-        VITE_API_URL: http://192.168.0.107/api
-        VITE_API_WS_URL: http://192.168.0.107
+        VITE_API_URL: ${HTTP_HOST}/api
+        VITE_API_WS_URL: ${HTTP_HOST}
     networks:
       - dev
