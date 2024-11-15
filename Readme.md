@@ -77,7 +77,7 @@ sudo docker compose up --build
 - Установленный Docker и Docker Compose.
 - Доступ к IP-адресу, указанному в переменной `HTTP_HOST`.
 
-  ## mongo-express
+## mongo-express
 - Для удобства установлен Веб-интерфейс администратора MongoDB (admin:pass) 
 
 
