@@ -17,7 +17,6 @@
 ```bash
 git clone --recurse-submodules <url-репозитория>
 ```
-````
 
 ---
 
